@@ -1,33 +1,54 @@
-HELP.md
+#Maven
 target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
 
-### STS ###
-.apt_generated
+#Eclipse
 .classpath
-.factorypath
 .project
-.settings
-.springBeans
-.sts4-cache
+.settings/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+#IntelliJ
+.idea/
 *.iml
+*.iws
 *.ipr
+out/
+.idea_modules/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
+#Logs
+logs/
+
+#Gradle
 build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+.gradle/
 
-### VS Code ###
-.vscode/
+# Arquivos de propriedades sensíveis
+src/main/resources/application.properties
+src/main/resources/application.yml
+
+# Arquivos de dados do banco de dados H2
+data/
+
+# Arquivos de log do H2
+*.trace.db
+
+# Arquivos de cache do H2
+*.db-shm
+*.db-lock
+*.db.mv.db
+
+# Arquivos de cache do Spring Boot DevTools
+.restart/
+
+# Arquivos de cache do Lombok
+target/generated-sources/
+
+# Outros arquivos temporários ou específicos do ambiente
+*.log
+*.swp
