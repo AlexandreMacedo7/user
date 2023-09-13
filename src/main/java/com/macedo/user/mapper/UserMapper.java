@@ -5,8 +5,6 @@ import com.macedo.user.model.dto.CreateUserDto;
 import com.macedo.user.model.dto.DetailsUserDto;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 @Component
 public class UserMapper {
 

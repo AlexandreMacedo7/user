@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -27,32 +26,32 @@ public class UserController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity create(@RequestBody @Valid CreateUserDto createUserDto, UriComponentsBuilder builder){
+    public ResponseEntity create(@RequestBody @Valid CreateUserDto createUserDto, UriComponentsBuilder builder) {
         var user = service.createUser(createUserDto);
         var uri = builder.path("/user/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(new DetailsUserDto(user));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getUserById(@PathVariable Long id){
+    public ResponseEntity getUserById(@PathVariable Long id) {
         var user = service.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @GetMapping
-    public ResponseEntity<Page<DetailsUserDto>> list(@PageableDefault(size = 5, sort = {"name"}) Pageable pageable){
+    public ResponseEntity<Page<DetailsUserDto>> list(@PageableDefault(size = 5, sort = {"name"}) Pageable pageable) {
         var page = service.listUsers(pageable);
         return ResponseEntity.ok(page);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteById(@PathVariable Long id){
+    public ResponseEntity deleteById(@PathVariable Long id) {
         service.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping
-    public ResponseEntity update(@RequestBody @Valid UpdatedUserDataDto dataDto){
+    public ResponseEntity update(@RequestBody @Valid UpdatedUserDataDto dataDto) {
         var user = service.updateUser(dataDto);
         return ResponseEntity.ok(new DetailsUserDto(user));
     }
