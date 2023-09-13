@@ -5,11 +5,14 @@ import com.macedo.user.model.dto.DetailsUserDto;
 import com.macedo.user.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.awt.print.Pageable;
+
 
 @RestController
 @RequestMapping("/user")
@@ -34,4 +37,11 @@ public class UserController {
         var user = service.getUserById(id);
         return ResponseEntity.ok(user);
     }
+
+    @GetMapping
+    public ResponseEntity<Page<DetailsUserDto>> list(@PageableDefault(size = 5, sort = {"name"}) Pageable pageable){
+        var page = service.listUsers(pageable);
+        return ResponseEntity.ok(page);
+    }
+
 }

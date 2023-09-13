@@ -6,9 +6,10 @@ import com.macedo.user.model.dto.CreateUserDto;
 import com.macedo.user.model.dto.DetailsUserDto;
 import com.macedo.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class UserService {
@@ -34,5 +35,10 @@ public class UserService {
             throw new EntityNotFoundException("User not found with ID: "+ id);
         }
 
+    }
+
+    public Page<DetailsUserDto> listUsers(Pageable pageable) {
+        Page<User> users = repository.findAll(pageable);
+        return users.map(DetailsUserDto::new);
     }
 }
