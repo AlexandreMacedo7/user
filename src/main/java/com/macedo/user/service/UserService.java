@@ -4,8 +4,11 @@ import com.macedo.user.mapper.UserMapper;
 import com.macedo.user.model.User;
 import com.macedo.user.model.dto.CreateUserDto;
 import com.macedo.user.model.dto.DetailsUserDto;
+import com.macedo.user.model.dto.UpdatedUserDataDto;
 import com.macedo.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.BeanUtils;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,18 +24,19 @@ public class UserService {
         this.repository = repository;
         this.userMapper = userMapper;
     }
-    public User createUser(CreateUserDto createUserDto){
+
+    public User createUser(CreateUserDto createUserDto) {
         var user = userMapper.toEntity(createUserDto);
         return repository.save(user);
     }
 
-    public DetailsUserDto getUserById(Long id){
+    public DetailsUserDto getUserById(Long id) {
         var user = repository.findById(id);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             var dto = userMapper.toDTO(user.get());
             return dto;
-        }else {
-            throw new EntityNotFoundException("User not found with ID: "+ id);
+        } else {
+            throw new EntityNotFoundException("User not found with ID: " + id);
         }
 
     }
@@ -40,5 +44,19 @@ public class UserService {
     public Page<DetailsUserDto> listUsers(Pageable pageable) {
         Page<User> users = repository.findAll(pageable);
         return users.map(DetailsUserDto::new);
+    }
+
+    public void deleteUser(Long id) {
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new EntityNotFoundException("User not found with ID: " + id);
+        }
+    }
+
+    public User updateUser(UpdatedUserDataDto dataDto) {
+        var user = repository.findById(dataDto.id()).orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + dataDto.id()));
+        BeanUtils.copyProperties(dataDto, user, "id");
+        return repository.save(user);
     }
 }

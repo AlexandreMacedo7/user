@@ -2,6 +2,7 @@ package com.macedo.user.controller;
 
 import com.macedo.user.model.dto.CreateUserDto;
 import com.macedo.user.model.dto.DetailsUserDto;
+import com.macedo.user.model.dto.UpdatedUserDataDto;
 import com.macedo.user.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -42,6 +43,18 @@ public class UserController {
     public ResponseEntity<Page<DetailsUserDto>> list(@PageableDefault(size = 5, sort = {"name"}) Pageable pageable){
         var page = service.listUsers(pageable);
         return ResponseEntity.ok(page);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id){
+        service.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping
+    public ResponseEntity update(@RequestBody @Valid UpdatedUserDataDto dataDto){
+        var user = service.updateUser(dataDto);
+        return ResponseEntity.ok(new DetailsUserDto(user));
     }
 
 }
