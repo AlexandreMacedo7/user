@@ -2,7 +2,8 @@ package com.macedo.user.mapper;
 
 import com.macedo.user.model.User;
 import com.macedo.user.model.dto.CreateUserDto;
-import com.macedo.user.model.dto.DetailsUserDto;
+import com.macedo.user.model.dto.DetailsUserDTO;
+import com.macedo.user.model.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +17,10 @@ public class UserMapper {
         return user;
     }
 
-    public DetailsUserDto toDTO(User user) {
-        DetailsUserDto dto = new DetailsUserDto(user);
-        return dto;
+    public UserDTO toDTO(User user) {
+        return new UserDTO(user);
+    }
+    public DetailsUserDTO toDetailsDTO(User user){
+        return new DetailsUserDTO(user);
     }
 }
