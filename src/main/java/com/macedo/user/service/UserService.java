@@ -3,8 +3,9 @@ package com.macedo.user.service;
 import com.macedo.user.mapper.UserMapper;
 import com.macedo.user.model.User;
 import com.macedo.user.model.dto.CreateUserDto;
-import com.macedo.user.model.dto.DetailsUserDto;
+import com.macedo.user.model.dto.DetailsUserDTO;
 import com.macedo.user.model.dto.UpdatedUserDataDto;
+import com.macedo.user.model.dto.UserDTO;
 import com.macedo.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
@@ -25,25 +26,25 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    public User createUser(CreateUserDto createUserDto) {
+    public UserDTO createUser(CreateUserDto createUserDto) {
         var user = userMapper.toEntity(createUserDto);
-        return repository.save(user);
+        repository.save(user);
+        return userMapper.toDTO(user);
     }
 
-    public DetailsUserDto getUserById(Long id) {
+    public DetailsUserDTO getUserById(Long id) {
         var user = repository.findById(id);
         if (user.isPresent()) {
-            var dto = userMapper.toDTO(user.get());
-            return dto;
+            return userMapper.toDetailsDTO(user.get());
         } else {
             throw new EntityNotFoundException("User not found with ID: " + id);
         }
 
     }
 
-    public Page<DetailsUserDto> listUsers(Pageable pageable) {
+    public Page<DetailsUserDTO> listUsers(Pageable pageable) {
         Page<User> users = repository.findAll(pageable);
-        return users.map(DetailsUserDto::new);
+        return users.map(DetailsUserDTO::new);
     }
 
     public void deleteUser(Long id) {
