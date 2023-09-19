@@ -14,7 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity(name = "usuario")
+@Entity(name = "Usuario")
 public class User {
 
     @Id
