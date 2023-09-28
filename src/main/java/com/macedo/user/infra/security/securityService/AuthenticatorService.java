@@ -2,6 +2,7 @@ package com.macedo.user.infra.security.securityService;
 
 import com.macedo.user.model.Login;
 import com.macedo.user.model.dto.CreateLoginDTO;
+import com.macedo.user.model.dto.LoginDTO;
 import com.macedo.user.repository.LoginRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,10 +23,11 @@ public class AuthenticatorService implements UserDetailsService {
         return repository.findByLogin(userName);
     }
 
-    public Login CreateLogin(CreateLoginDTO dto) {
+    public LoginDTO createLogin(CreateLoginDTO dto) {
         var login = new Login();
         login.setLogin(dto.login());
         login.setPassword(dto.password());
-        return repository.save(login);
+        repository.save(login);
+        return new LoginDTO(login);
     }
 }
