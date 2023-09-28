@@ -36,7 +36,7 @@ public class LoginController {
 
     @PostMapping("/create")
     public ResponseEntity createLogin(@RequestBody @Valid CreateLoginDTO dto){
-        var login = service.CreateLogin(dto);
+        var login = service.createLogin(dto);
         return ResponseEntity.ok().body(login);
     }
 }
