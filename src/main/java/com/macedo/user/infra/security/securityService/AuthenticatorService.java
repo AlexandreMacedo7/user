@@ -1,4 +1,4 @@
-package com.macedo.user.service;
+package com.macedo.user.infra.security.securityService;
 
 import com.macedo.user.model.Login;
 import com.macedo.user.model.dto.CreateLoginDTO;
@@ -9,17 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LoginAuthenticatorService implements UserDetailsService {
+public class AuthenticatorService implements UserDetailsService {
 
     private final LoginRepository repository;
 
-    public LoginAuthenticatorService(LoginRepository repository) {
+    public AuthenticatorService(LoginRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public UserDetails loadUserByUsername(String userDetails) throws UsernameNotFoundException {
-        return repository.findByLogin(userDetails);
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        return repository.findByLogin(userName);
     }
 
     public Login CreateLogin(CreateLoginDTO dto) {
