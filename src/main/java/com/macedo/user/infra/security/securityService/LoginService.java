@@ -2,6 +2,7 @@ package com.macedo.user.infra.security.securityService;
 
 import com.macedo.user.infra.security.securityDTOs.AuthenticatedDTO;
 import com.macedo.user.infra.security.securityDTOs.DataTokenJWTDTO;
+import com.macedo.user.infra.utility.PasswordHasher;
 import com.macedo.user.model.Login;
 import com.macedo.user.model.dto.CreateLoginDTO;
 import com.macedo.user.model.dto.LoginDTO;
@@ -34,7 +35,8 @@ public class LoginService {
     public LoginDTO createLogin(CreateLoginDTO dto) {
         var login = new Login();
         login.setLogin(dto.login());
-        login.setPassword(dto.password());
+        var hashed = PasswordHasher.hashPassword(dto.password());
+        login.setPassword(hashed);
         loginRepository.save(login);
         return new LoginDTO(login);
     }
