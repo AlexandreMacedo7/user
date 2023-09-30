@@ -5,7 +5,6 @@ import com.macedo.user.infra.security.securityService.LoginService;
 import com.macedo.user.model.dto.CreateLoginDTO;
 import com.macedo.user.model.dto.LoginDTO;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +16,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 @RequestMapping("/login")
 public class LoginController {
 
+    final private LoginService loginService;
 
-    @Autowired
-    private LoginService loginService;
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @PostMapping("/create")
     public ResponseEntity createLogin(@RequestBody @Valid CreateLoginDTO dto, UriComponentsBuilder builder) {
