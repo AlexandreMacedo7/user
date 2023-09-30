@@ -40,6 +40,25 @@ A API REST possui as seguintes endpoints:
     PUT /user/: Atualiza as informações de um usuário específicado no corpo da requisição.
     DELETE /user/{id}: Exclui um usuário específico.
 
+    Além disso, foram adicionadas as seguintes funcionalidades:
+
+    Criação de login de usuário
+    Autenticação de usuário com token JWT
+    Proteção das demais requisições por meio de token JWT
+    Testes unitários utilizando recursos do Spring Boot
+    Documentação com Spring Docs
+
+Tecnologias Utilizadas
+
+    Java
+    Spring Boot 3.1.3
+    Banco de dados H2
+
+Pré-requisitos
+
+    Java 8 ou superior
+    Maven
+
 Contribuição
 
 Contribuições são bem-vindas! Se você encontrar algum problema, tiver sugestões de melhorias ou quiser adicionar novos recursos, sinta-se à vontade para abrir uma nova issue ou enviar um pull request.
