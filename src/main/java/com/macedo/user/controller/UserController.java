@@ -27,7 +27,6 @@ public class UserController {
     }
 
     @PostMapping
-    @Transactional
     public ResponseEntity create(@RequestBody @Valid CreateUserDto createUserDto, UriComponentsBuilder builder) {
         var userDTO = service.createUser(createUserDto);
         return createResponseSuccess(userDTO, builder);

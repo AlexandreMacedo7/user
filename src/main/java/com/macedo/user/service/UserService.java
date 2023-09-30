@@ -8,6 +8,7 @@ import com.macedo.user.model.dto.UpdatedUserDataDto;
 import com.macedo.user.model.dto.UserDTO;
 import com.macedo.user.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
+    @Transactional
     public UserDTO createUser(CreateUserDto createUserDto) {
         var user = userMapper.toEntity(createUserDto);
         repository.save(user);
@@ -47,6 +49,7 @@ public class UserService {
         return users.map(DetailsUserDTO::new);
     }
 
+    @Transactional
     public void deleteUser(Long id) {
         try {
             repository.deleteById(id);
@@ -55,6 +58,7 @@ public class UserService {
         }
     }
 
+    @Transactional
     public User updateUser(UpdatedUserDataDto dataDto) {
         var user = repository.findById(dataDto.id()).orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + dataDto.id()));
         BeanUtils.copyProperties(dataDto, user, "id");
