@@ -1,64 +1,88 @@
-# Projeto User - CRUD em Java com Spring Boot
+# Sistema de Login e Usuários
 
-Este projeto é uma amostra simples de um CRUD (Create, Read, Update, Delete) desenvolvido em Java com o framework Spring Boot. Foi utilizado o Spring Boot 3.1.3 e o banco de dados H2.
+Este projeto é uma aplicação Java baseada no framework Spring Boot, que fornece endpoints para o gerenciamento de autenticação (login) e usuários. Utiliza Spring Security com JWT para a segurança, banco de dados H2 para armazenamento, Lombok para redução de boilerplate e Mockito para testes.
 
-## Funcionalidades
+## Estrutura do Projeto
 
-O projeto implementa as seguintes funcionalidades básicas de um CRUD:
+O projeto possui dois principais controladores (controllers):
 
-- Criação de usuários
-- Recuperação de informações de usuários
-- Atualização de informações de usuários
-- Exclusão de usuários
+### Login Controller
+
+Responsável por operações relacionadas ao login.
+
+#### Endpoints:
+
+- **POST /login/create**
+   - Cria um novo login.
+   - Parâmetros: Objeto `CreateLoginDTO` no corpo da requisição.
+   - Resposta: Retorna um objeto `LoginDTO` e gera um token JWT.
+
+- **POST /login**
+   - Realiza o login.
+   - Parâmetros: Objeto `AuthenticatedDTO` no corpo da requisição.
+   - Resposta: Retorna um token JWT.
+
+### User Controller
+
+Lida com operações relacionadas a usuários.
+
+#### Endpoints:
+
+- **POST /users**
+   - Cria um novo usuário.
+   - Parâmetros: Objeto `CreateUserDto` no corpo da requisição.
+   - Resposta: Retorna um objeto `UserDTO` e gera um link para o novo usuário criado.
+
+- **GET /users/{id}**
+   - Obtém informações de um usuário pelo ID.
+   - Parâmetros: ID do usuário na URL.
+   - Resposta: Retorna informações do usuário.
+
+- **GET /users**
+   - Lista usuários paginados.
+   - Parâmetros: Parâmetros de paginação na URL.
+   - Resposta: Retorna uma página de usuários.
+
+- **DELETE /users/{id}**
+   - Exclui um usuário pelo ID.
+   - Parâmetros: ID do usuário na URL.
+   - Resposta: Retorna uma resposta vazia.
+
+- **PUT /users**
+   - Atualiza informações de um usuário.
+   - Parâmetros: Objeto `UpdatedUserDataDto` no corpo da requisição.
+   - Resposta: Retorna um objeto `DetailsUserDTO` com as informações atualizadas do usuário.
+
+## Documentação Swagger
+
+A documentação Swagger pode ser acessada em [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
 
 ## Tecnologias Utilizadas
 
 - Java
-- Spring Boot 3.1.3
-- Banco de dados H2
+- Spring Boot
+- Spring Security com JWT
+- H2 Database
+- Lombok
+- Spring Doc
+- Mockito
 
-## Pré-requisitos
+## Instruções de Instalação
 
-- Java 8 ou superior
-- Maven
+1. Clone o repositório.
+2. Execute a aplicação usando sua IDE ou ferramenta de build preferida.
 
-## Instalação e Execução
+## Configurações Adicionais
 
-1. Clone este repositório:
+- Certifique-se de ter o Java instalado.
+- Configure corretamente as dependências no arquivo de configuração.
 
-   ```shell
-   git clone https://github.com/seu-usuario/seu-projeto.git
+## Contribuição
 
-Uso
+Sinta-se à vontade para contribuir.
 
-Após executar o projeto, você pode usar um cliente HTTP (como cURL ou Postman).
+## Contato
 
-A API REST possui as seguintes endpoints:
+Para dúvidas ou mais informações, entre em contato pelo email [alexandre.cst.macedo@gmail.com]()
 
-    POST /user: Cria um novo usuário.
-    GET /user/{id}: Retorna as informações de um usuário específico.
-    PUT /user/: Atualiza as informações de um usuário específicado no corpo da requisição.
-    DELETE /user/{id}: Exclui um usuário específico.
-
-    Além disso, foram adicionadas as seguintes funcionalidades:
-
-    Criação de login de usuário
-    Autenticação de usuário com token JWT
-    Proteção das demais requisições por meio de token JWT
-    Testes unitários utilizando recursos do Spring Boot
-    Documentação com Spring Docs
-
-Tecnologias Utilizadas
-
-    Java
-    Spring Boot 3.1.3
-    Banco de dados H2
-
-Pré-requisitos
-
-    Java 8 ou superior
-    Maven
-
-Contribuição
-
-Contribuições são bem-vindas! Se você encontrar algum problema, tiver sugestões de melhorias ou quiser adicionar novos recursos, sinta-se à vontade para abrir uma nova issue ou enviar um pull request.
+---
