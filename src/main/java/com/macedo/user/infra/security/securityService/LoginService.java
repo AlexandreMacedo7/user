@@ -7,6 +7,7 @@ import com.macedo.user.model.Login;
 import com.macedo.user.model.dto.CreateLoginDTO;
 import com.macedo.user.model.dto.LoginDTO;
 import com.macedo.user.repository.LoginRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ public class LoginService {
         return new DataTokenJWTDTO(tokenJWT);
     }
 
+    @Transactional
     public LoginDTO createLogin(CreateLoginDTO dto) {
         var login = new Login();
         login.setLogin(dto.login());
