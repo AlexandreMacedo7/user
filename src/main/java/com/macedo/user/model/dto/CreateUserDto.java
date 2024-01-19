@@ -1,6 +1,6 @@
 package com.macedo.user.model.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-public record CreateUserDto(@NotNull String name, @NotNull String email) {
+public record CreateUserDto(@NotBlank String name, @NotBlank String email) {
 }
