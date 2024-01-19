@@ -1,4 +1,6 @@
 package com.macedo.user.infra.security.securityDTOs;
 
-public record AuthenticatedDTO(String login, String password) {
+import jakarta.validation.constraints.NotBlank;
+
+public record AuthenticatedDTO(@NotBlank String login,@NotBlank String password) {
 }
