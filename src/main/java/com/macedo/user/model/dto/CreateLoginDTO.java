@@ -1,6 +1,6 @@
 package com.macedo.user.model.dto;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
-public record CreateLoginDTO(@NotNull String login, @NotNull String password) {
+public record CreateLoginDTO(@NotBlank String login, @NotBlank String password) {
 }
